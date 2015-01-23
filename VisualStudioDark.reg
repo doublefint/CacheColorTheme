@@ -56,7 +56,7 @@ Windows Registry Editor Version 5.00
 "B 23"=dword:001E1E1E
 "F 24"=dword:00D69C56
 "B 24"=dword:001E1E1E
-"F 25"=dword:00FFFFFF
+"F 25"=dword:00D69C56
 "B 25"=dword:001E1E1E
 "F 26"=dword:009B9B9B
 "B 26"=dword:001E1E1E
@@ -334,7 +334,7 @@ Windows Registry Editor Version 5.00
 "B 16"=dword:001E1E1E
 "F 17"=dword:00FFFFFF
 "B 17"=dword:001E1E1E
-"F 18"=dword:00FFFFFF
+"F 18"=dword:00D69C56
 "B 18"=dword:001E1E1E
 "F 19"=dword:00D69C56
 "B 19"=dword:001E1E1E
@@ -350,7 +350,7 @@ Windows Registry Editor Version 5.00
 "B 1"=dword:001E1E1E
 "F 2"=dword:00FFFFFF
 "B 2"=dword:001E1E1E
-"F 3"=dword:00FFFFFF
+"F 3"=dword:00D69C56
 "B 3"=dword:001E1E1E
 "F 4"=dword:00FFFFFF
 "B 4"=dword:001E1E1E
