@@ -1,4 +1,5 @@
 ## Color themes for InterSystems Caché Studio 
+Install: download 'themename'.reg file and import into your Windows registry
 
 ###[Zenburn](zenburn.reg)
 ![Zenburn](img/Zenburn.PNG)
