@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25">
+<Class name="theme.theme">
+<Description>
+Методы тем и генерация содержимого reg файла</Description>
+<Abstract>1</Abstract>
+<Super>%CSP.Page</Super>
+<TimeCreated>63205,74158.37755</TimeCreated>
+
+<Parameter name="CONTENTTYPE">
+<Description><![CDATA[
+Specifies the default content type for the page.  This can be overriden using the
+&lt;CSP:CONTENT TYPE=&gt; tag, or by setting the <b>%response</b>.ContentType property
+in the <method>OnPreHTTP</method> method.  The default value if this parameter is
+not set is text/html.]]></Description>
+<Default>application/regedit</Default>
+</Parameter>
+
+<Parameter name="THEMENAME">
+<Abstract>1</Abstract>
+</Parameter>
+
+<Method name="OnPreHTTP">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Boolean</ReturnType>
+<ServerOnly>1</ServerOnly>
+<Implementation><![CDATA[
+    s filename = $parameter(,"THEMENAME")_".reg"
+    d %response.SetHeader("Content-Disposition","inline; filename="""_filename_"""")
+    Q 1
+]]></Implementation>
+</Method>
+
+<Method name="OnPage">
+<Description>
+Генерирует содержимое для файла реестра с основными цветами темы</Description>
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+
+  k theme s theme="" d ..theme( .theme )
+  s background=$lg(theme("default"),2)
+  s selection=$lg(theme("selection"))
+    
+ &html<Windows Registry Editor Version 5.00
+ 
+[HKEY_CURRENT_USER\Software\InterSystems\Cache Studio\Editor]
+ 
+"Background Color"=dword:#( background )#
+"Selection Color"=dword:#( selection )#
+>
+ #; for each children of <class>language</class>
+ d ##class(lngCOS).reg( .theme )
+ w !,!
+ d ##class(lngSQL).reg( .theme )
+ w !,!
+ d ##class(lngCDL).reg( .theme )
+ w !,!
+ d ##class(lngHTML).reg( .theme )
+ w !,!
+ d ##class(lngXML).reg( .theme )
+ w !,!
+ d ##class(lngCSS).reg( .theme )
+ w !,!
+ d ##class(lngJS).reg( .theme )
+ w !,!
+ d ##class(lngUnknown).reg( .theme )
+  
+ Quit $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="theme">
+<Description><![CDATA[
+<var>theme</var> - array. Format: 
+s theme(scope)=$lb(foreground,background,bold,italic,underline)
+main scopes - http://manual.macromates.com/en/language_grammars#naming_conventions.html
+punctuation - http://pastie.org/private/ciiuinopemstdncv1auppa
+]]></Description>
+<Abstract>1</Abstract>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>*theme:%String</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+    
+    #define reg(%rgba) $s($e(%rgba,7,8)="":"00",1:$e(%rgba,7,8))_$e(%rgba,5,6)_$e(%rgba,3,4)_$e(%rgba,1,2)
+    
+    s theme("default")=$lb($$$reg(""), $$$reg("")) ;main colors
+    s theme("selection")=$lb($$$reg("")) ;selection area
+    
+    s theme("comment")=$lb($$$reg(""))  ; for comments
+    s theme("comment.block.documentation")=$lb($$$reg(""))  ; for comments
+    
+    s theme("constant")=$lb($$$reg("")) ; various forms of constants.
+    s theme("constant.numeric")=$lb($$$reg("")) ; those which represent numbers
+    s theme("constant.character")=$lb($$$reg("")) ; those which represent characters,
+    s theme("constant.character.escape")=$lb($$$reg("")) ; escape sequences like \e
+    s theme("constant.language")=$lb($$$reg("")) ;constants (generally) provided by the language which are “special” like true, false, nil, YES, NO, etc.
+    s theme("constant.other")=$lb($$$reg("")) ;other constants, e.g. colors in CSS.
+    
+    #; an entity refers to a larger part of the document, for example a chapter, class, function, or tag
+    s theme("entity")=$lb($$$reg("")) ;naming the larger entity
+    s theme("entity.name")=$lb($$$reg("")) ;naming the larger entity
+    s theme("entity.name.function")=$lb($$$reg("")) ;the name of a function
+    s theme("entity.name.type")=$lb($$$reg("")) ;name of a type declaration or class
+    s theme("entity.name.tag")=$lb($$$reg("")) ;tag name.
+    s theme("entity.other")=$lb($$$reg("")) ;other entities
+    #;s theme("entity.other.inherited-class")=$lb($$$reg("")) ;the superclass/baseclass name
+    s theme("entity.other.attribute-name")=$lb($$$reg("")) ;the name of an attribute (mainly in tags)
+        
+    s theme("invalid")=$lb($$$reg("")) ; stuff which is “invalid”
+    s theme("invalid.illegal")=$lb($$$reg("")) ;illegal, e.g. an ampersand or lower-than character in HTML (which is not part of an entity/tag
+    s theme("invalid.deprecated")=$lb($$$reg("")) ;for deprecated stuff e.g. using an API function which is deprecated or using styling with strict HTML.
+        
+    s theme("keyword")=$lb($$$reg("")) ; keywords (when these do not fall into the other groups)
+    s theme("keyword.control")=$lb($$$reg("")) ;mainly related to flow control like continue, while, return, etc.
+    s theme("keyword.operator")=$lb($$$reg("")) ;operators can either be textual (e.g. or) or be characters
+    s theme("keyword.other")=$lb($$$reg("")) ;other keywords
+        
+    s theme("storage")=$lb($$$reg("")) ; things relating to “storage”. the type of something, class, function, int, var,
+    s theme("storage.type")=$lb($$$reg("")) ;the type of something, class, function, int, var, etc
+    s theme("storage.modifier")=$lb($$$reg("")) ;storage modifier like static, final, abstract, etc
+    
+    s theme("string")=$lb($$$reg("")) ; strings.
+    s theme("string.quoted")=$lb($$$reg("")) ;quoted strings
+    s theme("string.quoted.double")=$lb($$$reg("")) ;double quoted strings: "foo"
+    s theme("string.quoted.other")=$lb($$$reg("")) ;other types of quoting: $'shell', %s{...}.
+    s theme("string.unquoted")=$lb($$$reg("")) ;for things like here-docs and here-strings.
+    s theme("string.regexp")=$lb($$$reg("")) ;regular expressions: /(\w+)/.
+    s theme("string.other")=$lb($$$reg("")) ;other types of strings (should rarely be used)
+        
+    s theme("support")=$lb($$$reg("")) ;  things provided by a framework or library should be BELOW support
+    s theme("support.function")=$lb($$$reg("")) ; functions provided by the framework/library
+    s theme("support.class")=$lb($$$reg("")) ; when the framework/library provides classes
+    s theme("support.type")=$lb($$$reg("")) ; types provided by the framework/library, this is probably only used for languages derived from C, which has typedef (and struct). Most other languages would introduce new types as classes
+    s theme("support.constant")=$lb($$$reg("")) ; constants (magic values) provided by the framework/library
+    s theme("support.variable")=$lb($$$reg("")) ; variables provided by the framework/library. For example NSApp in AppKit.
+    s theme("support.other")=$lb($$$reg("")) ; the above should be exhaustive, but for everything else use support.other.
+    
+    
+    s theme("variable")=$lb($$$reg("")) ; variables. Not all languages allow easy identification
+    s theme("variable.parameter")=$lb($$$reg("")) ; when the variable is declared as the parameter
+    s theme("variable.language")=$lb($$$reg("")) ; reserved language variables like this, super, self, etc
+    s theme("variable.other")=$lb($$$reg("")) ; other variables, like $some_variables
+    
+    /// punctuation - http://pastie.org/private/ciiuinopemstdncv1auppa     
+    s theme("punctuation")=$lb($$$reg(""))  
+    
+    #; Punctuation that is intended to delimit the bounds of a single item, generally 
+    #; something that will become a real singular object in compiled/interpreted code.  C
+    s theme("punctuation.definition")=$lb($$$reg("")) 
+    
+    #; The start/end of a structured section of some sort (comment, paragraph, opening and 
+    #; closing braces in code, etc). 
+    s theme("punctuation.section")=$lb($$$reg(""))
+  
+    /*
+    Any punctuation intended to separate two internal parts of a logical whole.
+    Examples: key-value, list, arguments
+    _Notes_: `key-value` refers to the delimiter between a key/value relationship in
+    languages like HTML/XML/YAML, should not be used for true assignments.
+    */
+    s theme("punctuation.separator")=$lb($$$reg(""))
+
+    /*
+    Punctuation that terminates a statement, rule, etc. (the ; in print "foo";)
+    Examples: statement, rule, line 
+    */  
+    s theme("punctuation.terminator")=$lb($$$reg(""))
+ 
+    
+    Q 1
+]]></Implementation>
+</Method>
+</Class>
+</Export>

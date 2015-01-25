@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25">
+<Class name="theme.lngUnknown">
+<Description>
+неизвестного тип (простой текстовый файл)</Description>
+<Super>theme.language</Super>
+<TimeCreated>63208,63212.055528</TimeCreated>
+
+<Parameter name="ELEMENTS">
+<Description>
+Количество элементов расцветки языка </Description>
+<Default>1</Default>
+</Parameter>
+
+<Parameter name="REGPATH">
+<Default>[HKEY_CURRENT_USER\Software\InterSystems\Cache Studio\Editor\Language6]</Default>
+</Parameter>
+</Class>
+</Export>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25">
+<Class name="theme.lngCOS">
+<Description>
+Настройки расцветки для языка cos</Description>
+<Super>theme.language</Super>
+<TimeCreated>63208,63092.255758</TimeCreated>
+
+<Parameter name="ELEMENTS">
+<Description>
+Количество элементов расцветки языка </Description>
+<Default>55</Default>
+</Parameter>
+
+<Parameter name="REGPATH">
+<Default>[HKEY_CURRENT_USER\Software\InterSystems\Cache Studio\Editor\Language1]</Default>
+</Parameter>
+
+<Method name="scheme">
+<Description>
+схема элементов языка</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>*scheme:%String=""</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+ 
+    d ##super(.scheme)
+    
+    s scheme(1)="" ;   WhiteSpace          пробел  
+    s scheme(0)="invalid" ; error. Example: s test = $(wrong)
+
+    s scheme(6)="string" ;String "something"     
+    s scheme(41)="string.regexp"        ;  Pattern keyword ?.2N       
+
+    s scheme(7) ="comment" ; Comment
+    s scheme(51)="comment.block.documentation" ; Documentation  ///documentation text
+
+    s scheme(32)="keyword.control"      ; Command do      
+    s scheme(4) ="keyword.control"      ; Dots    keyword d  q:res=1  .   старый точечный синтаксис   
+    s scheme(24)="keyword.operator"     ; Operator         
+    s scheme(11)="keyword.other"        ; PreProcessor command    #define     
+    s scheme(5) ="keyword.other"        ; Object(class)  ##class 
+    s scheme(26)="keyword.other"        ; Special keyword         
+    s scheme(45)="keyword.other"        ; Object Super   ##super    
+    s scheme(12)="keyword.other"        ; Macro   $$$OK      
+    s scheme(29)="keyword.other"        ; HTML   &html<> 
+    s scheme(43)="keyword.other"        ; Javascript &js<>      
+    s scheme(9) ="keyword.other"        ; SQL support &sql()      
+    s scheme(44)="keyword.other"        ; CSP Extensions  support #( )#   в открытом <server> возможно не работает
+    s scheme(19)="keyword.other"        ; Indirection keyword @       
+
+    s scheme(28)="support.variable"     ; System variable  $this, $system      
+    s scheme(14)="support.variable"     ; External Reference           
+    s scheme(18)="support.variable"     ; Global Variable variable    +^WebStress.Run     
+    
+    s scheme(36)="support.function"     ; Object attribute  s ..attribute=''""  Обращение к свойству класса 
+    s scheme(15)="support.function"     ; Extrinsic Function  support $$  $$ - only   
+    s scheme(17)="support.function"     ; Function  $piece   
+    s scheme(10)="support.function"     ; PreProcessor function   $g(args(%name,1))       
+    
+    s scheme(16)="support.constant"     ; Format Specifier    !?  Управление выводом  
+    
+    s scheme(23)="constant.numeric"     ; Number:  10
+
+    s scheme(3) ="entity.name.section"   ; Label: routine метка   
+
+    s scheme(13)="punctuation"          ; Delimeter:    ,()/:^      
+            
+    s scheme(22)="entity.name.type"     ;  Name    entity  ##class(Name)       
+    s scheme(25)="entity.name.function" ;  Routine entity  $$func^routine()    имя рутины  
+
+    s scheme(21)="support.constant"     ;  Mnemonic    keyword /CUP(1,2)       
+    s scheme(27)="support.variable"     ;  Structured variable variable    w ^$JOB Структурная переменная  
+    s scheme(30)="support.variable"     ;  Object property variable    obj.name        
+    s scheme(31)="support.variable"     ;  Object name variable    ##class(Name)       
+    s scheme(35)="support.function"     ;  Object method       d obj.method()  Обращение к методу текущего класса  
+    s scheme(55)="support.function"     ;  Object member   d ..member()
+    s scheme(8) ="support.function"     ;   Object dot operator keyword obj.prop, ..ThisClassMethod     
+
+    s scheme(38)="support.type"         ;  VB Form name    support <td>#(_comment_&nbsp    _comment_   
+    s scheme(39)="support.type"         ;  VB Control name     
+    s scheme(40)="support.type"         ;  VB Property name  
+    
+    s scheme(37)="variable.language"    ;  Object (this):  ##this 
+    s scheme(33)="variable.language"    ;  Object instance var     i%property      
+    s scheme(34)="variable.language"    ;  Object reference var        r%parent        
+    s scheme(48)="variable.parameter"   ;  Parameter: d function(parameter)
+    s scheme(46)="variable"             ;  Local variable private :  переменные объявленные внутри метода    
+    s scheme(49)="variable"             ;  Local undeclared    s undeclared=10     
+    s scheme(20)="variable"             ;  Local Variable  s var = 10                
+     
+    s scheme(42)="punctuation.section"  ;  Brace       {}()        
+
+    s scheme(47)="invalid.illegal"      ;  Option track warnning:  использование необъявленных переменных  
+    s scheme(50)=""                     ;  Neutral     ###   
+    s scheme(52)="invalid.deprecated"   ;  Unknown Z-command       ZF      
+    s scheme(53)="invalid.deprecated"   ;  Unknown Z-function      Q $ZMSM(4,Str)      
+    s scheme(54)="invalid.deprecated"   ;  Unknown Z-variable      $zu $zd$g(one)  
+    
+ 
+ Q 1
+]]></Implementation>
+</Method>
+</Class>
+</Export>

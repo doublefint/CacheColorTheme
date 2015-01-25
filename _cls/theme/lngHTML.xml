@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25">
+<Class name="theme.lngHTML">
+<Description>
+Разметка для html</Description>
+<Super>theme.language</Super>
+<TimeCreated>63208,63107.148557</TimeCreated>
+
+<Parameter name="ELEMENTS">
+<Description>
+Количество элементов расцветки языка </Description>
+<Default>12</Default>
+</Parameter>
+
+<Parameter name="REGPATH">
+<Default>[HKEY_CURRENT_USER\Software\InterSystems\Cache Studio\Editor\Language5]</Default>
+</Parameter>
+
+<Method name="scheme">
+<Description>
+Схема элементов языка</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>*scheme:%String=""</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+    d ##super(.scheme)
+    s scheme(0)="invalid.illegal" ; Error       
+    s scheme(4)="comment" ; Comment <!-- comment-->
+    s scheme(5)="punctuation.section" ; Delimeter  <>=,
+    s scheme(6)="constant.character.escape" ; Escape Sequence  &nbsp;
+    s scheme(7)="entity.other.attribute-name" ;  Name        class=
+    s scheme(8)="constant.numeric" ; Number    
+    s scheme(9)="keyword.other" ;  Script
+    s scheme(10)="string" ; String attr='String'    
+    s scheme(11)="entity.name.tag" ; Tag keyword <tag>
+    s scheme(3) ="" ; Attribute       not worked
+    s scheme(12)="" ; Text   
+
+    Q 1
+
+ /*
+1   White Space     
+ */
+]]></Implementation>
+</Method>
+</Class>
+</Export>

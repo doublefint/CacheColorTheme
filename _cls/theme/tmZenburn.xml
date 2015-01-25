@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25">
+<Class name="theme.tmZenburn">
+<Super>theme.theme</Super>
+<TimeCreated>63208,63265.421926</TimeCreated>
+
+<Parameter name="THEMENAME">
+<Default>zenburn</Default>
+</Parameter>
+
+<Method name="theme">
+<Description><![CDATA[
+<var>theme</var> - array. Format: 
+s theme(scope)=$lb(foreground,background,bold,italic,underline)
+main scopes - http://manual.macromates.com/en/language_grammars#naming_conventions.html
+punctuation - http://pastie.org/private/ciiuinopemstdncv1auppa]]></Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>*theme:%String</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+    
+    #define reg(%rgba) $s($e(%rgba,7,8)="":"00",1:$e(%rgba,7,8))_$e(%rgba,5,6)_$e(%rgba,3,4)_$e(%rgba,1,2)
+    
+    s theme("default")=$lb($$$reg("DEDEDE"), $$$reg("393939")) ;main colors
+    s theme("selection")=$lb($$$reg("8383839C")) ;selection area
+    
+    s theme("comment")=$lb($$$reg("87AE86"))  ; for comments
+    s theme("comment.block.documentation")=$lb($$$reg("D6D6D6"))  ; for comments
+    
+    s theme("constant")=$lb($$$reg("87D6D5")) ; various forms of constants.
+    s theme("constant.numeric")=$lb($$$reg("87D6D5")) ; those which represent numbers
+    s theme("constant.character")=$lb($$$reg("FF8080")) ; those which represent characters,
+    s theme("constant.character.escape")=$lb($$$reg("FF8080")) ; escape sequences like \e
+    s theme("constant.language")=$lb($$$reg("D6D6AE")) ;constants (generally) provided by the language which are “special” like true, false, nil, YES, NO, etc.
+    s theme("constant.other")=$lb($$$reg("CC9495")) ;other constants, e.g. colors in CSS.
+    
+    
+    
+    #; an entity refers to a larger part of the document, for example a chapter, class, function, or tag
+    
+    s theme("entity")=$lb($$$reg("D6D6D6")) ;naming the larger entity
+    s theme("entity.name")=$lb($$$reg("D6D6D6")) ;naming the larger entity
+    s theme("entity.name.function")=$lb($$$reg("FFFD87")) ;the name of a function
+    s theme("entity.name.type")=$lb($$$reg("F4A020")) ;name of a type declaration or class
+    s theme("entity.name.tag")=$lb($$$reg("D6D7AF")) ;tag name.
+    s theme("entity.other")=$lb($$$reg("D6D6D6")) ;other entities
+    s theme("entity.other.inherited-class")=$lb($$$reg("D78D1B")) ;the superclass/baseclass name
+    s theme("entity.other.attribute-name")=$lb($$$reg("D6D7AF")) ;the name of an attribute (mainly in tags)
+        
+    s theme("invalid")=$lb($$$reg("FF5274")) ; stuff which is “invalid”
+    s theme("invalid.illegal")=$lb($$$reg("FF5274")) ;illegal, e.g. an ampersand or lower-than character in HTML (which is not part of an entity/tag
+    s theme("invalid.deprecated")=$lb($$$reg("FF5274")) ;for deprecated stuff e.g. using an API function which is deprecated or using styling with strict HTML.
+        
+    s theme("keyword")=$lb($$$reg("FED6AF")) ; keywords (when these do not fall into the other groups)
+    s theme("keyword.control")=$lb($$$reg("FED6AF")) ;mainly related to flow control like continue, while, return, etc.
+    s theme("keyword.operator")=$lb($$$reg("FEFED6")) ;operators can either be textual (e.g. or) or be characters
+    s theme("keyword.other")=$lb($$$reg("95BFF3")) ;other keywords
+        
+    s theme("storage")=$lb($$$reg("FFFB9D")) ; things relating to “storage”. the type of something, class, function, int, var,
+    s theme("storage.type")=$lb($$$reg("FFFB9D")) ;the type of something, class, function, int, var, etc
+    s theme("storage.modifier")=$lb($$$reg("FFFB9D")) ;storage modifier like static, final, abstract, etc
+    
+    s theme("string")=$lb($$$reg("D68686")) ; strings.
+    s theme("string.quoted")=$lb($$$reg("D68686")) ;quoted strings
+    s theme("string.quoted.double")=$lb($$$reg("D68686")) ;double quoted strings: "foo"
+    s theme("string.quoted.other")=$lb($$$reg("D68686")) ;other types of quoting: $'shell', %s{...}.
+    s theme("string.unquoted")=$lb($$$reg("D68686")) ;for things like here-docs and here-strings.
+    s theme("string.regexp")=$lb($$$reg("C76F41")) ;regular expressions: /(\w+)/.
+    s theme("string.other")=$lb($$$reg("D68686")) ;other types of strings (should rarely be used)
+        
+    s theme("support")=$lb($$$reg("FFFD87")) ;  things provided by a framework or library should be BELOW support
+    s theme("support.function")=$lb($$$reg("FFFD87")) ; functions provided by the framework/library
+    s theme("support.class")=$lb($$$reg("F4A020")) ; when the framework/library provides classes
+    s theme("support.type")=$lb($$$reg("F4A020")) ; types provided by the framework/library, this is probably only used for languages derived from C, which has typedef (and struct). Most other languages would introduce new types as classes
+    s theme("support.constant")=$lb($$$reg("D6D6AE")) ; constants (magic values) provided by the framework/library
+    s theme("support.variable")=$lb($$$reg("C7BA18")) ; variables provided by the framework/library. For example NSApp in AppKit.
+    s theme("support.other")=$lb($$$reg("CC9495")) ; the above should be exhaustive, but for everything else use support.other.
+    
+    
+    #;s theme("variable")=$lb("") ; variables. Not all languages allow easy identification
+    s theme("variable.parameter")=$lb("FEFED6") ; when the variable is declared as the parameter
+    s theme("variable.language")=$lb($$$reg("D6D6AE")) ; reserved language variables like this, super, self, etc
+    s theme("variable.other")=$lb($$$reg("FED6AF")) ; other variables, like $some_variables
+    
+    /// punctuation - http://pastie.org/private/ciiuinopemstdncv1auppa     
+    #;s theme("punctuation")=$lb("")  
+    
+    #; Punctuation that is intended to delimit the bounds of a single item, generally 
+    #; something that will become a real singular object in compiled/interpreted code.  C
+    #;s theme("punctuation.definition")=$lb("") 
+    
+    #; The start/end of a structured section of some sort (comment, paragraph, opening and 
+    #; closing braces in code, etc). 
+    s theme("punctuation.section")=$lb($$$reg("898989"))
+        
+    /*
+    Any punctuation intended to separate two internal parts of a logical whole.
+    Examples: key-value, list, arguments
+    _Notes_: `key-value` refers to the delimiter between a key/value relationship in
+    languages like HTML/XML/YAML, should not be used for true assignments.
+    */
+    #;s theme("punctuation.separator")=$lb($$$reg(""))
+
+    /*
+    Punctuation that terminates a statement, rule, etc. (the ; in print "foo";)
+    Examples: statement, rule, line 
+    */  
+    #;s theme("punctuation.terminator")=$lb($$$reg(""))
+   
+    Q 1
+]]></Implementation>
+</Method>
+</Class>
+</Export>

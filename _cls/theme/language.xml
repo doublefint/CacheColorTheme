@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25">
+<Class name="theme.language">
+<Description>
+Любой язык студии</Description>
+<Abstract>1</Abstract>
+<TimeCreated>63206,1894.745658</TimeCreated>
+
+<Parameter name="ELEMENTS">
+<Description>
+Количество элементов расцветки языка </Description>
+<Abstract>1</Abstract>
+</Parameter>
+
+<Parameter name="COMMENT">
+<Abstract>1</Abstract>
+</Parameter>
+
+<Parameter name="REGPATH">
+<Default>[HKEY_CURRENT_USER\Software\InterSystems\Cache Studio\Editor]</Default>
+<Abstract>1</Abstract>
+</Parameter>
+
+<Method name="scheme">
+<Description>
+Схема элементов языка</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>*scheme:%String=""</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+    s scheme = $parameter(,"ELEMENTS")        
+    f i=0:1:scheme s scheme(i)=""
+    Q $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="reg">
+<Description><![CDATA[
+Вывести в формате файла реестра
+<var>foreground</var> цвет текста
+<var>background</var> цвет фона]]></Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec><![CDATA[&theme:%String]]></FormalSpec>
+<ReturnType>%String</ReturnType>
+<Implementation><![CDATA[
+    w !, ";", $classname()
+    w !, $parameter(,"REGPATH") ;раздел реестра
+    
+    s default = theme("default"), foredef = $lg(default), backdef = $lg(default,2)
+    
+    k scheme s scheme = "", sc=..scheme(.scheme)
+    s i="" for { s i=$o(scheme(i)) Q:i=""
+       s scope=$g(scheme(i)) s:scope="" scope="default"
+       s colors = $g(theme(scope))
+       , foreground = $lg(colors, 1, foredef)
+       , background = $lg(colors, 2, backdef)
+       w !,"""F ",i,"""=dword:",foreground
+       w !,"""B ",i,"""=dword:",background
+    }
+]]></Implementation>
+</Method>
+</Class>
+</Export>

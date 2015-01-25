@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25">
+<Class name="theme.lngCSS">
+<Super>theme.language</Super>
+<TimeCreated>63208,63023.666545</TimeCreated>
+
+<Parameter name="ELEMENTS">
+<Description>
+Количество элементов расцветки языка </Description>
+<Default>12</Default>
+</Parameter>
+
+<Parameter name="REGPATH">
+<Default>[HKEY_CURRENT_USER\Software\InterSystems\Cache Studio\Editor\Language15]</Default>
+</Parameter>
+
+<Method name="scheme">
+<Description>
+Схема элементов языка</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>*scheme:%String=""</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+    d ##super(.scheme)
+    s scheme(0)="invalid.illegal" ;  Error   
+    
+    s scheme(3)="entity.name" ; Indentifier  
+    s scheme(6)="string" ; String  
+    
+    s scheme(15)="comment" ;CSS style comment 
+    
+    s scheme(4)="keyword.other" ;  @keyword    
+    s scheme(5)="keyword.control" ;   CSS @keyword    
+    
+    s scheme(7) ="entity.name.type" ;   #Name   
+    s scheme(14)="entity" ;  Unicode range   
+    s scheme(18)="entity.name.function" ;  Function    
+    
+    s scheme(8 )="constant.numeric" ; Number 
+    s scheme(9) ="constant.numeric" ;   Hexcolor  
+    s scheme(10)="constant.numeric" ;  Percentage  
+    s scheme(11)="constant.other" ;  Dimensions  
+    s scheme(12)="constant.other" ;  Measure 
+    
+    
+    s scheme(13)="string" ;  Uri 
+    
+    s scheme(16)="punctuation" ;  CSS delimeter   
+    s scheme(17)="punctuation" ;  Other delimeter 
+    
+    s scheme(19)="keyword.operator" ;  Operator    keyword
+    s scheme(20)="keyword.other"    ;  CSP extensions  
+    
+    Q $$$OK
+    
+ /*
+1   White Space 
+    
+    */
+]]></Implementation>
+</Method>
+</Class>
+</Export>

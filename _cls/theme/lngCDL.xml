@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25">
+<Class name="theme.lngCDL">
+<Description>
+Cache Definition Language</Description>
+<Abstract>1</Abstract>
+<Super>theme.language</Super>
+<TimeCreated>63208,63068.471464</TimeCreated>
+
+<Parameter name="ELEMENTS">
+<Description>
+Количество элементов расцветки языка </Description>
+<Default>24</Default>
+</Parameter>
+
+<Parameter name="REGPATH">
+<Default>[HKEY_CURRENT_USER\Software\InterSystems\Cache Studio\Editor\Language3]</Default>
+</Parameter>
+
+<Method name="scheme">
+<Description>
+Схема элементов языка</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>*scheme:%String=""</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+    d ##super(.scheme)
+    
+    s scheme(0) ="invalid" ;Error
+    s scheme(4) ="storage.type" ;Keyword 
+    s scheme(5) ="entity.name.type" ;Class name
+    s scheme(6) ="comment" ;Comment
+    s scheme(7) ="comment.block.documentation" ;Description
+    s scheme(9) ="constant.numeric" ;Numeric literal
+    s scheme(10)="string" ;  String literal
+    s scheme(14)="string" ;  XML Attribute value - аттрибуты схемы хранения
+    s scheme(24)="variable.parameter"  ;  Parameter
+    s scheme(8) ="punctuation.section" ;  Delimeter  {}
+    
+    #;s scheme(11)="entity.name" ; Identifier имена функций и параметров
+    #;s scheme(22)="" ;  XML text - текст между элементами
+    
+    Q $$$OK
+
+ /*
+
+1   White Space
+3   ClassMember 
+
+12  Sql Identifier
+13  Routine name
+
+15  XML CDATA
+16  XML Entity
+17  XML Entity Value
+18  XML Escape Sequence
+19  XML P.I.value
+20  XML Public id
+21  XML System Literal
+23  Class Parameter
+
+
+    */
+]]></Implementation>
+</Method>
+</Class>
+</Export>
