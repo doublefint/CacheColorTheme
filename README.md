@@ -2,19 +2,19 @@
 Install: download 'themename'.reg file and import into your Windows registry
 
 ### [Zenburn](zenburn.reg)
-![Zenburn](img/Zenburn.PNG)
+![Zenburn](https://github.com/doublefint/CacheColorTheme/raw/master/img/Zenburn.PNG)
 
 ### [LAZY](LAZY.reg)
-![LAZY](img/Lazy.PNG)
+![LAZY](https://github.com/doublefint/CacheColorTheme/raw/master/img/Lazy.PNG)
 
 ### [VisualStudioDark](VisualStudioDark.reg)
-![VisualStudioDark](img/VisualStudioDark.PNG)
+![VisualStudioDark](https://github.com/doublefint/CacheColorTheme/raw/master/img/VisualStudioDark.PNG)
 
 ### [EspressoTutti](espressotutti.reg)
-![EspressoTutti](img/EspressoTutti.PNG)
+![EspressoTutti](https://github.com/doublefint/CacheColorTheme/raw/master/img/EspressoTutti.PNG)
 
 ### [Twilight](twilight.reg)
-![Twilight](img/Twilight.PNG)
+![Twilight](https://github.com/doublefint/CacheColorTheme/raw/master/img/Twilight.PNG)
 
 ### [NodeJS](NodeJS.reg)
-![NodeJS](img/NodeJS.PNG)
+![NodeJS](https://github.com/doublefint/CacheColorTheme/raw/master/img/NodeJS.PNG)
